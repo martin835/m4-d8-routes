@@ -5,6 +5,8 @@ import {BsBell} from 'react-icons/bs'
 import NetflixLogo from "../data/netflix_logo.png"
 import AvatarLogo from "../data/avatar.png"
 import './MyNavbar.css'
+import { Link } from "react-router-dom"
+
 const MyNavbar = (props) => {
     
 
@@ -14,12 +16,16 @@ const MyNavbar = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home" style={{ color: "white" }}>
-              Home
-            </Nav.Link>
-            <Nav.Link href="#link1" style={{ color: "white" }}>
-              Tv Shows
-            </Nav.Link>
+            <Link to="/">
+              <div className="nav-link" style={{ color: "white" }}>
+                Home
+              </div>
+            </Link>
+            <Link to="/tv-shows">
+              <div className="nav-link" style={{ color: "white" }}>
+                Tv Shows
+              </div>
+            </Link>
             <Nav.Link href="#link2" style={{ color: "white" }}>
               Movies
             </Nav.Link>
