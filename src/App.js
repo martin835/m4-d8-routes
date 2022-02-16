@@ -21,6 +21,10 @@ setSearchQuery = (str) => {
   this.setState({searchQuery: str})
 }
 
+componentDidMount(){
+  this.setState({ searchQuery: "Shrek" });
+}
+
 
   render() {
     return (
@@ -36,7 +40,10 @@ setSearchQuery = (str) => {
             path="/"
             element={<NetflixBody searchQuery={this.state.searchQuery} />}
           />
-          <Route path="/tv-shows" element={<TvShows />} />
+          <Route
+            path="/tv-shows"
+            element={<TvShows searchQuery={this.state.searchQuery} setSearchQuery={this.setSearchQuery} />}
+          />
           <Route path="/:movieID" element={<MovieDetails />} />
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>
