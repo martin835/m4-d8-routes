@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useEffect, useState } from "react";
 import MovieCard from "./MovieCard"
+import useDidUpdateEffect from "../hooks/useDidUpdateEffect"
 
 export default function TvShows(props) {
 
@@ -11,10 +12,10 @@ useEffect(() => {
   fetchSeriesOnLoad();
 }, []);
 
-useEffect(() => {    
-    if(props.searchQuery){
-      fetchSeriesOnSearch();
-    }
+useDidUpdateEffect(() => {
+  if (props.searchQuery) {
+    fetchSeriesOnSearch();
+  }
 }, [props.searchQuery]);
 
 
