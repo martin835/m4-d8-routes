@@ -21,9 +21,9 @@ setSearchQuery = (str) => {
   this.setState({searchQuery: str})
 }
 
-componentDidMount(){
+/* componentDidMount(){
   this.setState({ searchQuery: "Shrek" });
-}
+} */
 
 
   render() {

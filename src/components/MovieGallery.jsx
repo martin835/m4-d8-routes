@@ -1,8 +1,3 @@
-// ASSIGNED TO GIORGIO
-// This takes prop from it's parent (Netflix Body)
-// and uses it to fetch array of objects
-// and then passes props of the object to it's child (Movie Card)
-
 import { Row } from "react-bootstrap";
 import MovieCard from "./MovieCard";
 
@@ -18,14 +13,14 @@ class MovieGallery extends Component {
     if (prevProps.query !== this.props.query && this.props.query.length > 4)
       try {
         console.log(this.state.searchQuery);
-        this.setState({ searchQuery: this.props.query });
+        /* this.setState({ searchQuery: this.props.query }); */
 
         let response = await fetch(
           "http://www.omdbapi.com/?apikey=a0d093ea&s=" + this.props.query
         );
         if (response.ok) {
           let data = await response.json();
-          if(data.Search.length !== 0) {
+          if(data.Search !== "undefined") {
             this.setState({ movies: data.Search });
           }
           

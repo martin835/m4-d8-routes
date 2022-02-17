@@ -7,70 +7,66 @@ export default function TvShows(props) {
 
 const [series, setSeries] = useState([]);
 
-useEffect(() => {
-    const fetchSeriesOnLoad = async () => {
-      let show = "star trek";
-      console.log(show);
-      if (show.length > 4) {
-        try {
-          let response = await fetch(
-            `http://www.omdbapi.com/?apikey=a0d093ea&s=${show}&type=series`
-          );
-          if (response.ok) {
-            let data = await response.json();
-            console.log(data.Search);
-
-            setSeries(data.Search);
-
-            console.log(series);
-          } else {
-            alert("something wrong with the data");
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
-props.setSearchQuery("")
+useEffect(() => {    
   fetchSeriesOnLoad();
 }, []);
 
-useEffect(() => {
-    const fetchSeriesOnSearch = async () => {
-      let show = props.searchQuery;
-      console.log(show);
-      if (show.length > 4) {
-        try {
-          let response = await fetch(
-            `http://www.omdbapi.com/?apikey=a0d093ea&s=${show}&type=series`
-          );
-          if (response.ok) {
-            let data = await response.json();
-            console.log(data.Search);
-            if (
-              data.Search.length !== "undefined" &&
-              props.searchQuery.length > 0
-            ) {
-              setSeries(data.Search);
-            }
-           
-          } else {
-            alert("something wrong with the data");
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
+useEffect(() => {    
     if(props.searchQuery){
       fetchSeriesOnSearch();
     }
 }, [props.searchQuery]);
 
 
+const fetchSeriesOnLoad = async () => {
+  let show = "star trek";
+  console.log(show);
+  if (show.length > 4) {
+    try {
+      let response = await fetch(
+        `http://www.omdbapi.com/?apikey=a0d093ea&s=${show}&type=series`
+      );
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data.Search);
 
+        setSeries(data.Search);
 
+        console.log(series);
+      } else {
+        alert("something wrong with the data");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 
+const fetchSeriesOnSearch = async () => {
+  let show = props.searchQuery;
+  console.log(show);
+  if (show.length > 4) {
+    try {
+      let response = await fetch(
+        `http://www.omdbapi.com/?apikey=a0d093ea&s=${show}&type=series`
+      );
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data.Search);
+        if (
+          data.Search.length !== "undefined" &&
+          props.searchQuery.length > 0
+        ) {
+          setSeries(data.Search);
+        }
+      } else {
+        alert("something wrong with the data");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
 
 
   return (
