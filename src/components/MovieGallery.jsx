@@ -9,21 +9,18 @@ class MovieGallery extends Component {
   };
 
   componentDidUpdate = async (prevProps, prevState) => {
-   
     if (prevProps.query !== this.props.query && this.props.query.length > 4)
       try {
         console.log(this.state.searchQuery);
-        /* this.setState({ searchQuery: this.props.query }); */
 
         let response = await fetch(
           "http://www.omdbapi.com/?apikey=a0d093ea&s=" + this.props.query
         );
         if (response.ok) {
           let data = await response.json();
-          if(data.Search !== "undefined") {
+          if (data.Search !== "undefined") {
             this.setState({ movies: data.Search });
           }
-          
         } else {
           alert("something wrong with the data");
         }
@@ -33,13 +30,14 @@ class MovieGallery extends Component {
   };
 
   componentDidMount = async () => {
+    const apiUrl = process.env.REACT_APP_BE_URL;
+    console.log(apiUrl);
+
     try {
-      let response = await fetch(
-        "http://www.omdbapi.com/?apikey=a0d093ea&s=" + this.props.query
-      );
+      let response = await fetch(`${apiUrl}/media`);
       if (response.ok) {
         let data = await response.json();
-        this.setState({ movies: data.Search });
+        this.setState({ movies: data });
         console.log(data);
       } else {
         alert("something wrong with the data");
